@@ -1,0 +1,56 @@
+name: Generate Single Recursive Index
+
+on:
+  push:
+    branches:
+      - main # Or 'master'
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    # ADD THIS BLOCK TO GRANT WRITE PERMISSIONS
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install tree
+        run: sudo apt-get update && sudo apt-get install -y tree
+
+      - name: Generate single recursive index.html
+        run: |
+          # --- Configure Your Settings ---
+          PAGE_TITLE="Index of Health Research"    # The <title> and <h1> of the page
+          BASE_URL="https://greg-cc.github.io/Health_Research/" # The base URL for all links
+          # -------------------------------
+          
+          echo "Generating index for root directory..."
+          
+          # Use tree to generate an HTML file
+          # -H "..." : Generate HTML with the specified base URL prepended to all links.
+          # -L 10  : Set a recursion depth limit of 10 levels
+          # -T "..." : Sets the page <title> and <h1>
+          # -I "..." : Ignore files/dirs. Use '|' to separate patterns.
+          # --noreport: Don't show the "X directories, Y files" at the bottom
+          # -o "..." : Output directly to the index.html file
+          tree -H "$BASE_URL" -L 10 -T "$PAGE_TITLE" -I "index.html|.github|LICENSE|test|test2|*.yml|*.zip" --noreport -o "index.html" --charset utf-8
+          
+          echo "Generated index.html"
+
+      - name: Commit and push if index.html changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Add the single index.html file from the root directory
+          git add "index.html" 
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "docs: auto-generate Health_Research index"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
