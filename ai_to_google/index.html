@@ -28,6 +28,7 @@
 
 
 
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Greg's Health Research</title>
   
@@ -114,10 +115,37 @@ Carnosic OR Chlorogenic OR trans-p-coumaric OR Ellagic OR Ferulic OR
 Gallic OR Salicylic OR Apigenin OR Catechin OR Chrysin OR Hyperoside OR
 Kaempferol OR Luteolin OR Naringenin OR Quercetin OR Quercitrin OR
 Rutoside OR Vitexin OR Carnosol OR Arbutoside )))</a><br>
+1.5 Optional<br>
+Gather all results from google search using a addon the automatically
+scrolls google search results (like endless google) and a chrome
+extention called "simple mass downloader"<br>
+<img src="../../../../AppData/Local/Temp/moz-screenshot-1.jpg" alt=""><br>
 2. Export results by clicking "Send to"<br>
 <img style="width: 945px; height: 462px;" src="pubmed.png" alt="pubmed.png"><br>
-3. rename file to include an extenstion of txt.&nbsp;&nbsp;&nbsp; (ie.&nbsp; exported_abstracts.txt)<br>
-3a.&nbsp; Chop big export files into smaller pieces for some AI's like NotebookLM with Gsplit https://www.gdgsoft.com/gsplit<br>
+3. rename file to include an extenstion of txt.&nbsp;&nbsp;&nbsp; (ie.&nbsp; exported_abstracts.txt)<br>3a.&nbsp;
+For Pubmed abstract file: Chop big export files into smaller pieces for
+some AI's like NotebookLM with Gsplit https://www.gdgsoft.com/gsplit<br>
+3b.&nbsp; For Google search downloads: Lets sort the entire list of
+downloaded files by number of times a keyword appear in the files
+verbiage.&nbsp; This will allow us to filter out irrelivant studies and
+webpages in which the keyword only appears a limited number of
+times.&nbsp; Use voidtools file manager and the query shown below to
+activate content indexing and there, define the folders and files to
+index in the settings.&nbsp; Once done, back in the program, enter the
+below as a single line as seen in image.&nbsp; Then, to sort the new
+column you've created, click on its descriptive text at the top of the
+column.&nbsp; Select files and drag and drop into NotepadLM or similar
+AI.<br>
+STRINGCOUNT($content:,"telomere")&gt;2&nbsp; add-column:a
+a-label:="Word Count" a:=STRINGCOUNT($content:,"telomere")
+sort:a-descending add-column:b b-label:="Word Count2"
+b:=STRINGCOUNT($content:,"cancer") sort:b-descending add-column:c
+c-label:="column c " c:=STRINGCOUNT($content:,"methylene blue")
+sort:c-descending add-column:d d-label:="combo" d:=a:+5*c:
+sort:d-descending<br>
+the "chat" seen at the beginning of the below query will filter out files that dont have chat in the filename.<br>
+<br>
+<img src="../../../../AppData/Local/Temp/moz-screenshot-2.jpg" alt=""><br>
 4. Send to AI and request it sort by efficacy.<br>
 5. Redo with another AI to confirm.<br>
 6. Compare reports.<br>
@@ -162,9 +190,9 @@ Jump to <a href="#Paralyzed">#Paralyzed</a><br>
   <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/blood_thinner_danger_-Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.m4a"><big><span style="font-weight: bold;">AUDIO </span></big>Nerves- severed nerve repair - paralyzed/blood_thinner_danger_-Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.m4a</a><br>
     <a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a></li>
   <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;">AUDIO</span></big> Nerves- severed nerve repair - paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3</a></li>
-  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3">Audio Nerves- severed nerve repair - paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3</a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3"><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a></a></li>
-  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3"><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3">Audio Nerves- severed nerve repair - paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3</a></li>
-  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Ancient%20Formula%20Regenerates%20Spinal%20Cord%20Nerves.mp3"><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Ancient%20Formula%20Regenerates%20Spinal%20Cord%20Nerves.mp3">Audio Nerves- severed nerve repair - paralyzed/Ancient Formula Regenerates Spinal Cord Nerves.mp3</a></li>
+  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3">Audio Nerves- severed nerve repair - paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3</a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Repairing_The_Spine_With_Ancient_Molecular_Engineering.mp3"></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a></li>
+  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3"></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3">Audio Nerves- severed nerve repair - paralyzed/Bu_Shen_Huo_Xue_Regenerates_Spinal_Nerves.mp3</a></li>
+  <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Ancient%20Formula%20Regenerates%20Spinal%20Cord%20Nerves.mp3"></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Remodeling_the_Glial_Scar_with_BSHXF.mp3"><big><span style="font-weight: bold;"></span></big></a><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Ancient%20Formula%20Regenerates%20Spinal%20Cord%20Nerves.mp3">Audio Nerves- severed nerve repair - paralyzed/Ancient Formula Regenerates Spinal Cord Nerves.mp3</a></li>
   <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/Research%20Plan_%20Bu%20Shen%20Huo%20Xue%20Formula.pdf">Nerves- severed nerve repair - paralyzed/Research Plan_ Bu Shen Huo Xue Formula.pdf</a></li>
   <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/13020_2022_Article_639.pdf">Nerves- severed nerve repair - paralyzed/13020_2022_Article_639.pdf</a></li>
   <li><a href="docs/Health/Nerves-%20severed%20nerve%20repair%20-%20paralyzed/pubmed-BuYangORHu-set.nbib.TXT">PUBMED input (google search added as well) - paralyzed/pubmed-BuYangORHu-set.nbib.TXT</a></li>
