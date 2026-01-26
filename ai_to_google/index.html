@@ -143,7 +143,9 @@ b:=STRINGCOUNT($content:,"cancer") sort:b-descending add-column:c
 c-label:="column c " c:=STRINGCOUNT($content:,"methylene blue")
 sort:c-descending add-column:d d-label:="combo" d:=a:+5*c:
 sort:d-descending<br>
-the "chat" seen at the beginning of the below query will filter out files that dont have chat in the filename.<br>
+the "chat" seen at the beginning of the below query will filter out
+files that dont have "chat" in the folder name (when menu selection
+"search" has folders selected) or filename. TIP: Use "!chat" to invert.<br>
 <br>
 <img src="../../../../AppData/Local/Temp/moz-screenshot-2.jpg" alt=""><br>
 4. Send to AI and request it sort by efficacy.<br>
