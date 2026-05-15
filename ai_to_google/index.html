@@ -108,12 +108,16 @@ Find updates to this page at https://github.com/greg-cc/Los_Angeles_Harbor_Handy
 
     
 <h2><a href="#Ligaments">Ligaments and tendon research</a><br>
-<br>
+</h2>
+<h2><a name="Rejuvination"></a><a href="Rejuvenation">Rejuvenation</a></h2>
+
+<h2><br>
 <br>
 <br>
 Herbal Biohacking - a How To guide.<br>
 <small><small>Find new herbs for any condition <small><small>(some of my findings considers seniors on various classes of medications) </small></small></small></small><br>
 </h2>
+
 1. use an advanced herb-finding query to collect abstracts from NIH (ie. Rheumatoid Arthritis)  : <a href="https://pubmed.ncbi.nlm.nih.gov/?term=%28%22Tinnitus%22%29+AND+%28%28%22Antineoplastic+Agents%22%5Bpa%5D+OR+Antioxidants%5Bpa%5D+OR+%22Enzyme+Inhibitors%22%5Bpa%5D+OR+%22antineoplastic+agents+phytogenic%22%5Bpa%5D%29+OR+%28Plants%2C+Medicinal%5Bmh%5D+OR+Phytotherapy%5Bmh%5D+OR+Flavonoids%5Bmh%5D+OR+Terpenes%5Bmh%5D+OR+Alkaloids%5Bmh%5D+OR+%22Plant+Preparations%22%5Bmh%5D+OR+%28+%22Organic+Chemicals%2Fagonists%22%5BMesh%5D+OR+%22Organic+Chemicals%2Fanalysis%22%5BMesh%5D+OR+%22Organic+Chemicals%2Fantagonists+and+inhibitors%22%5BMesh%5D+OR+%22Organic+Chemicals%2Fimmunology%22%5BMesh%5D+OR+%22Organic+Chemicals%2Fpharmacology%22%5BMesh%5D+OR+%22Organic+Chemicals%2Ftherapeutic+use%22%5BMesh%5D+OR+%22Gemmotherapy%22+OR+Caffeic+OR+Carnosic+OR+Chlorogenic+OR+%22trans-p-coumaric%22+OR+Ellagic+OR+Ferulic+OR+Gallic+OR+Salicylic+OR+Apigenin+OR+Catechin+OR+Chrysin+OR+Hyperoside+OR+Kaempferol+OR+Luteolin+OR+Naringenin+OR+Quercetin+OR+Quercitrin+OR+Rutoside+OR+Vitexin+OR+Carnosol+OR+Arbutoside+OR+Alkaloid+%29%29%29">("Rheumatoid
 Arthritis") AND ((Antineoplastic Agents[pa] OR Antioxidants[pa] OR
 "Enzyme Inhibitors"[pa] OR "antineoplastic agents phytogenic"[pa]) OR
@@ -126,18 +130,16 @@ OR "Organic Chemicals/therapeutic use"[Mesh]OR Rid-GTE OR Caffeic OR
 Carnosic OR Chlorogenic OR trans-p-coumaric OR Ellagic OR Ferulic OR
 Gallic OR Salicylic OR Apigenin OR Catechin OR Chrysin OR Hyperoside OR
 Kaempferol OR Luteolin OR Naringenin OR Quercetin OR Quercitrin OR
-Rutoside OR Vitexin OR Carnosol OR Arbutoside )))</a><br>
-1.5 Optional<br>
+Rutoside OR Vitexin OR Carnosol OR Arbutoside )))</a><br><span style="font-style: italic;">(1.5 Optional method</span><br style="font-style: italic;"><span style="font-style: italic;">
 Gather all results from google search using a addon the automatically
 scrolls google search results (like endless google) and a chrome
-extention called "simple mass downloader"<br>
-<img src="../../../../AppData/Local/Temp/moz-screenshot-1.jpg" alt=""><br>
-2. Export results by clicking "Send to"<br>
+extention called "simple mass downloader")</span><br style="font-style: italic;">
+<img style="font-style: italic;" src="../../../../AppData/Local/Temp/moz-screenshot-1.jpg" alt=""><br>
+2. Export results by clicking "Send to" and export in PUBMED format (for ~150 word summary).<br>
 <img style="width: 945px; height: 462px;" src="pubmed.png" alt="pubmed.png"><br>
-3. rename file to include an extenstion of txt.&nbsp;&nbsp;&nbsp; (ie.&nbsp; exported_abstracts.txt)<br>3a.&nbsp;
+3. rename file to include an extenstion of txt.&nbsp;&nbsp;&nbsp; (ie.&nbsp; exported_abstracts.txt)<br><span style="font-style: italic;">(3a. optional)&nbsp;
 For Pubmed abstract file: Chop big export files into smaller pieces for
-some AI's like NotebookLM with Gsplit https://www.gdgsoft.com/gsplit<br>
-3b.&nbsp; For Google search downloads: Lets sort the entire list of
+some AI's like NotebookLM with Gsplit https://www.gdgsoft.com/gsplit</span><br><span style="font-style: italic;">(3b. optional)&nbsp; For Google search downloads (instructions for filtering too many results): Lets sort the entire list of
 downloaded files by number of times a keyword appear in the files
 verbiage.&nbsp; This will allow us to filter out irrelivant studies and
 webpages in which the keyword only appears a limited number of
@@ -147,17 +149,17 @@ index in the settings.&nbsp; Once done, back in the program, enter the
 below as a single line as seen in image.&nbsp; Then, to sort the new
 column you've created, click on its descriptive text at the top of the
 column.&nbsp; Select files and drag and drop into NotepadLM or similar
-AI.<br>
+AI.</span><br style="font-style: italic;"><span style="font-style: italic;">
 STRINGCOUNT($content:,"telomere")&gt;2&nbsp; add-column:a
 a-label:="Word Count" a:=STRINGCOUNT($content:,"telomere")
 sort:a-descending add-column:b b-label:="Word Count2"
 b:=STRINGCOUNT($content:,"cancer") sort:b-descending add-column:c
 c-label:="column c " c:=STRINGCOUNT($content:,"methylene blue")
 sort:c-descending add-column:d d-label:="combo" d:=a:+5*c:
-sort:d-descending<br>
+sort:d-descending</span><br style="font-style: italic;"><span style="font-style: italic;">
 the "chat" seen at the beginning of the below query will filter out
 files that dont have "chat" in the folder name (when menu selection
-"search" has folders selected) or filename. TIP: Use "!chat" to invert.<br>
+"search" has folders selected) or filename. TIP: Use "!chat" to invert.</span><br>
 <br>
 <img src="../../../../AppData/Local/Temp/moz-screenshot-2.jpg" alt=""><br>
 4. Send to AI and request it sort by efficacy.<br>
@@ -170,8 +172,7 @@ clinical results as well as the dosage and the schedule of dosing. Is
 it better to dose every other day, every day, or perhaps three or four
 days a month? after you discuss all that , discuss which herbs might be
 kept onhand incase any unwanted reactions occur without going into the
-science of why it is needed including trouble sleeping.&nbsp; Spell out
-all herbal substances for verification of
+science of why it is needed including trouble sleeping.&nbsp; Spell out any confusing herbal substances for
 those attempting to write these substances down.&nbsp; Then create 4
 sets of these
 herbs with a schedule to regenerate cartilage that include short cold
@@ -195,7 +196,8 @@ libraries wizard needed, conflicting versions, please advise.)<br>
 <a href="docs/Health/AI%27s%20log%20file%20of%20%27thinking%27.html">Here's an example of typical AI's thinking while consolidating scientific studies</a><br><br>
 ===========================<br>
 <br>
-Example output below:<br>
+Example output below: <br>
+&nbsp;<big><big><big><span style="font-weight: bold; text-decoration: underline;">begin health research</span></big></big></big> examples.<br>
 <br>
 <a href="#Peripheral_Neuropathy">quick link: <big style="font-weight: bold;"><big>Peripheral Neuropathy from compression or Herbs good for rebuilding nerves</big></big></a><br>&nbsp;&nbsp;
 <br>
@@ -894,11 +896,13 @@ synthetic medications.mp3</a> L<br>
   </li>
   
   </ul>
-<h2>Rejuvination, youthful health, anti-aging, life extension<br>
+<h2><a href="Rejuvination">Rejuvination</a>, youthful health, anti-aging, life extension<br>
 </h2>
 <ul>
-  <li><a href="https://www.youtube.com/watch?v=QVdIG6xCWac&amp;t=1588s">https://www.youtube.com/watch?v=QVdIG6xCWac&amp;t=1588s </a><br>
-  </li>
+  <li><a href="https://www.youtube.com/watch?v=QVdIG6xCWac&amp;t=1588s">https://www.youtube.com/watch?v=QVdIG6xCWac&amp;t=1588s&nbsp;</a></li>
+  <li><a href="https://www.youtube.com/watch?v=1QJx7lOjkaY&amp;t=272s">https://www.youtube.com/watch?v=1QJx7lOjkaY&amp;t=272s</a></li>
+  <li>Duplicate ----&gt; <a href="https://www.youtube.com/watch?v=1QJx7lOjkaY&amp;t=614s">https://www.youtube.com/watch?v=1QJx7lOjkaY&amp;t=614s</a></li>
+  <li><a href="https://www.youtube.com/watch?v=BXjdVDHQoJw&amp;t=40s">https://www.youtube.com/watch?v=BXjdVDHQoJw&amp;t=40s</a></li>
   <li>&nbsp;<a href="docs/Health/Rejuvenation/Botanical%20Sources%20of%20Therapeutic%20and%20Anti-Aging%20Phytochemicals.pdf">file:///C:/Users/g/Documents/GitHub/Los_Angeles_Harbor_Handyman/ai_to_google/docs/Health/Rejuvenation/Botanical
 Sources of Therapeutic and Anti-Aging Phytochemicals.pdf</a></li>
   <li>&nbsp;<a href="docs/Health/Rejuvenation/Piperine,_Ashwagandha,_and_Natural_Rejuvenation_Mechanisms.mp3">file:///C:/Users/g/Documents/GitHub/Los_Angeles_Harbor_Handyman/ai_to_google/docs/Health/Rejuvenation/Piperine,_Ashwagandha,_and_Natural_Rejuvenation_Mechanisms.mp3</a></li>
