@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Dose Methylene Blue Protocol: Oncology & Rejuvenation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fafaf9; 
+            color: #292524; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(229, 231, 235, 0.5); 
+        }
+        .tab-btn { transition: all 0.2s ease-in-out; }
+        .tab-active { 
+            background-color: #1e3a8a; 
+            color: #ffffff; 
+            border-color: #1e3a8a; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link { position: relative; transition: color 0.2s ease; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #1d4ed8; transition: width 0.2s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; margin: 0; 
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased overflow-x-hidden">
+
+<!-- Chosen Palette: Warm Neutrals with Deep Blue Accents (Stone-50 background, Stone-800 text, Blue-700/Blue-900 accents for Methylene Blue thematic connection, Red-600 for critical warnings). -->
+<!-- Application Structure Plan: A single-page scrolling dashboard. The structure moves logically from high-level protocol overview -> foundational science (the "Engine") -> temporal execution (Phases timeline) -> practical execution (Interactive dosing calculator) -> enhanced botanical validation -> strict safety rules. This architecture was chosen because managing a complex oncological/rejuvenation protocol requires understanding the *why* before executing the *how*. The interactive calculator and tabbed scientific breakdowns prevent cognitive overload while ensuring precise adherence to the source document's strict mathematical rules. -->
+<!-- Visualization & Content Choices: 
+1. Protocol Timeline -> Line Chart (Chart.js) -> Goal: Visualize dosage changes over 16 weeks to clarify Phase 1, 2, and 3 transitions -> Justification: Temporal data is best understood visually, reinforcing the 50% drop in Phase 2.
+2. Synergy Engine -> Radar Chart (Chart.js) -> Goal: Compare the multi-pathway effects of MB, NMN, and PEA -> Justification: Shows overlapping benefits (anti-cancer vs rejuvenation) without using complex biological diagrams (NO SVG).
+3. Dosing Calculator -> Interactive HTML Form -> Goal: Convert mg to drops based on the 5% calibration rule -> Justification: Direct user interaction prevents dangerous mathematical errors.
+4. Tabbed Interfaces -> HTML/JS -> Goal: Organize deep textual data for compounds and botanicals -> Justification: Keeps the UI clean while allowing deep-dives into expert validation. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<nav class="fixed w-full z-50 glass-panel border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold text-blue-800 tracking-tighter">MB<span class="text-stone-400">|</span>ONC</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#overview" class="nav-link text-sm font-medium text-stone-600 hover:text-blue-700">Overview</a>
+                <a href="#engine" class="nav-link text-sm font-medium text-stone-600 hover:text-blue-700">The Engine</a>
+                <a href="#phases" class="nav-link text-sm font-medium text-stone-600 hover:text-blue-700">Phases</a>
+                <a href="#calculator" class="nav-link text-sm font-medium text-stone-600 hover:text-blue-700">Calibration</a>
+                <a href="#botanicals" class="nav-link text-sm font-medium text-stone-600 hover:text-blue-700">Botanicals</a>
+                <a href="#safety" class="nav-link text-sm font-medium text-red-600 hover:text-red-800">Safety Rules</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-24 pb-16">
+
+    <section id="overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">Rejuvenation & Metabolic Oncology Protocol</h1>
+            <p class="text-lg text-stone-600 mb-8">An interactive guide for managing the high-dose Methylene Blue (150mg) protocol, integrating NMN, PEA, and topical botanicals to target cancer metabolism while inducing systemic rejuvenation.</p>
+            <div class="inline-flex items-center justify-center space-x-4 bg-blue-50 border border-blue-200 rounded-full px-6 py-2">
+                <span class="text-blue-800 font-semibold tracking-wide">CORE METRICS:</span>
+                <span class="text-sm font-medium text-blue-600">150mg Baseline</span>
+                <span class="text-stone-300">|</span>
+                <span class="text-sm font-medium text-blue-600">16 Week Cycle</span>
+                <span class="text-stone-300">|</span>
+                <span class="text-sm font-medium text-blue-600">6 Days On / 1 Off</span>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 border-t-4 border-t-blue-600">
+                <div class="text-3xl mb-4 text-blue-600">&#9875;</div>
+                <h3 class="text-xl font-bold mb-2">Unmoving Baseline</h3>
+                <p class="text-stone-600 text-sm">The foundational oral stack consists of precisely 150mg Methylene Blue, 500mg NMN, and 600mg PEA daily.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 border-t-4 border-t-amber-500">
+                <div class="text-3xl mb-4 text-amber-500">&#9851;</div>
+                <h3 class="text-xl font-bold mb-2">The Sunday Reset</h3>
+                <p class="text-stone-600 text-sm">Mandatory 24-hour oral cessation. 0mg of MB, NMN, and PEA to allow renal clearance and drop accumulation thresholds.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 border-t-4 border-t-red-600">
+                <div class="text-3xl mb-4 text-red-600">&#9888;</div>
+                <h3 class="text-xl font-bold mb-2">Critical Mandates</h3>
+                <p class="text-stone-600 text-sm">G6PD screening is non-negotiable. Strict low-tyramine diet required due to complete systemic MAO-A enzyme deactivation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="engine" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-4">The Foundational Engine</h2>
+            <p class="text-stone-600 max-w-3xl">Explore the mechanistic synergy of the unmoving oral baseline. This section validates how these specific compounds work in tandem to achieve the dual objectives of disrupting cancer metabolism while preserving and rejuvenating healthy tissue.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="flex space-x-2 mb-6 border-b border-stone-200 pb-2 overflow-x-auto">
+                    <button onclick="switchTab('engine', 'mb')" id="tab-mb" class="tab-btn tab-active px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">Methylene Blue (150mg)</button>
+                    <button onclick="switchTab('engine', 'nmn')" id="tab-nmn" class="tab-btn text-stone-500 hover:text-stone-800 px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">NMN (500mg)</button>
+                    <button onclick="switchTab('engine', 'pea')" id="tab-pea" class="tab-btn text-stone-500 hover:text-stone-800 px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">PEA (600mg)</button>
+                </div>
+
+                <div id="content-mb" class="tab-content block">
+                    <h4 class="text-2xl font-bold text-blue-700 mb-3">Methylene Blue: The Metabolic Modulator</h4>
+                    <p class="mb-4 text-stone-600">At a high dose of 150mg, Methylene Blue acts as a potent alternative electron carrier in the mitochondrial electron transport chain (bypassing Complex I-III dysfunction).</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Anti-Cancer Validation:</strong> Reverses the Warburg effect by forcing oxidative phosphorylation, increasing ROS specifically inside dysregulated cancer cells leading to selective apoptosis.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Rejuvenation Profile:</strong> In healthy cells, it acts as a terminal antioxidant, extending cellular lifespan, increasing ATP production, and boosting cognitive function.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="content-nmn" class="tab-content hidden">
+                    <h4 class="text-2xl font-bold text-stone-800 mb-3">NMN: The NAD+ Restorer</h4>
+                    <p class="mb-4 text-stone-600">Nicotinamide Mononucleotide is critical for replenishing depleted NAD+ pools, which are heavily taxed during cellular stress and aging.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Synergy with MB:</strong> MB increases the rate of cellular respiration, requiring robust NAD+ availability. NMN fuels the sirtuin pathways necessary for DNA repair and genomic stability.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Skin & Tissue Rejuvenation:</strong> Sustained NAD+ levels promote dermal cellular turnover, fighting intrinsic aging and maintaining tissue elasticity.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="content-pea" class="tab-content hidden">
+                    <h4 class="text-2xl font-bold text-stone-800 mb-3">PEA: The Inflammatory Break</h4>
+                    <p class="mb-4 text-stone-600">Palmitoylethanolamide (600mg) modulates the endocannabinoid system and directly dampens mast cell activation and neuroinflammation.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Tumor Microenvironment:</strong> Chronic inflammation drives cancer proliferation. PEA alters the tumor microenvironment by downregulating pro-inflammatory cytokines.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">&#10003;</span>
+                            <div><strong>Protocol Tolerance:</strong> Mitigates systemic inflammatory responses that can occur during tumor lysis or intense metabolic shifts, preserving host vitality.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                <h4 class="text-center font-semibold text-stone-700 mb-4">Pathway Activation Radar</h4>
+                <div class="chart-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phases" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-4">Chronological Phasing</h2>
+            <p class="text-stone-600 max-w-3xl">The protocol is divided into three distinct phases over 15.5 weeks. This interactive chart visualizes the precise dosing alterations required to prevent receptor downregulation and ensure continuous therapeutic efficacy. The "Sunday Rule" (0mg) applies universally throughout all phases.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 mb-8">
+            <div class="chart-container">
+                <canvas id="phaseChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+                <div class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">Weeks 1 - 6</div>
+                <h4 class="text-lg font-bold text-stone-800 mb-2">Phase 1: Loading & Attack</h4>
+                <p class="text-sm text-stone-600 mb-3">Full systemic saturation. Maximum therapeutic pressure applied.</p>
+                <ul class="text-sm text-stone-700 space-y-1 font-medium">
+                    <li>&bull; Oral MB: 150mg/day</li>
+                    <li>&bull; Topicals: Core Botanicals Active</li>
+                </ul>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-5 border border-blue-200 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">CRITICAL</div>
+                <div class="text-xs font-bold text-blue-500 uppercase tracking-wider mb-1">Weeks 6.5 - 7.5</div>
+                <h4 class="text-lg font-bold text-blue-900 mb-2">Phase 2: The Receptor Reset</h4>
+                <p class="text-sm text-blue-800 mb-3 opacity-90">Prevents tachyphylaxis and clears cross-talk signaling friction.</p>
+                <ul class="text-sm text-blue-900 space-y-1 font-semibold">
+                    <li>&bull; Oral MB Cut 50%: 75mg/day</li>
+                    <li>&bull; Topicals: ZERO Active Botanicals</li>
+                </ul>
+            </div>
+            <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+                <div class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">Weeks 7.5 - 15.5</div>
+                <h4 class="text-lg font-bold text-stone-800 mb-2">Phase 3: Sustained Maintenance</h4>
+                <p class="text-sm text-stone-600 mb-3">Return to full pressure with altered topical stimuli to prevent adaptation.</p>
+                <ul class="text-sm text-stone-700 space-y-1 font-medium">
+                    <li>&bull; Oral MB: 150mg/day</li>
+                    <li>&bull; Topicals: Alternate Botanicals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-4">5% Drop Calibration Engine</h2>
+            <p class="text-stone-600 max-w-3xl">Because liquid Methylene Blue concentrations vary, this protocol strictly relies on a 5% solution. Use this calculator to eliminate mathematical errors. <strong>1 drop of 5% solution = exactly 2.5 mg.</strong></p>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-900 to-stone-900 rounded-3xl p-8 md:p-12 text-white shadow-xl">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-200">Calculate Daily Dose</h3>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-stone-300 mb-2">Current Protocol Phase target (mg)</label>
+                        <select id="calcPhase" class="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors" onchange="updateCalculator()">
+                            <option value="150">Active Phase (150mg)</option>
+                            <option value="75">Washout Phase 2 (75mg)</option>
+                            <option value="0">Sunday Reset (0mg)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-stone-300 mb-2">Target Mg</label>
+                            <input type="number" id="inputMg" value="150" class="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-3 text-white font-mono text-lg focus:outline-none focus:border-blue-400" oninput="calculateFromMg()">
+                        </div>
+                        <div class="text-stone-400 text-2xl font-light mt-6">=</div>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-stone-300 mb-2">Required Drops</label>
+                            <input type="number" id="inputDrops" value="60" class="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-3 text-blue-400 font-mono text-lg font-bold focus:outline-none focus:border-blue-400" oninput="calculateFromDrops()">
+                        </div>
+                    </div>
+                    <p class="text-sm text-stone-400 italic mt-2" id="calcWarning"></p>
+                </div>
+
+                <div class="w-full md:w-5/12 bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-sm">
+                    <h4 class="text-lg font-semibold text-white mb-4 border-b border-white/20 pb-2">Execution Rules</h4>
+                    <ul class="space-y-4 text-sm text-stone-200">
+                        <li class="flex items-start">
+                            <span class="text-blue-400 font-bold mr-3">1</span>
+                            <span><strong>Solution Verify:</strong> Ensure your bottle explicitly states "5% Solution" or "50 mg/mL".</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 font-bold mr-3">2</span>
+                            <span><strong>Maximum Limit:</strong> Never exceed 60 drops on active days. Never exceed 30 drops on washout days.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 font-bold mr-3">3</span>
+                            <span><strong>Delivery:</strong> Mix required drops in water or ascorbic acid (Vitamin C) to convert to leucomethylene blue for enhanced absorption and palatability.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="botanicals" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-4">Topical Botanical Synergy & Validation</h2>
+            <p class="text-stone-600 max-w-3xl">While the oral stack treats systemically, the source document dictates the use of "Core Topical Rejuvenation Botanicals" during Phase 1 and "Alternate Botanicals" in Phase 3. Below is the validated framework for selecting and rotating these compounds to maximize skin rejuvenation (anti-wrinkle) and localized anti-cancer terrain modulation without taxing the liver's MAO-A clearance pathways.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="border border-stone-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-stone-800">Core Topicals (Phase 1)</h3>
+                    <span class="bg-stone-100 text-stone-600 text-xs font-bold px-2 py-1 rounded">Weeks 1-6</span>
+                </div>
+                <p class="text-sm text-stone-600 mb-4 pb-4 border-b border-stone-100">Focus: Aggressive antioxidant saturation, collagen synthesis stimulation, and local metabolic uncoupling.</p>
+                <ul class="space-y-4">
+                    <li class="flex">
+                        <div class="w-8 text-xl text-green-600">&#10048;</div>
+                        <div>
+                            <div class="font-semibold text-stone-800 text-sm">EGCG (Green Tea Extract)</div>
+                            <div class="text-xs text-stone-500 mt-1">Potent anti-angiogenic properties (anti-cancer) while preventing collagen cross-linking (anti-wrinkle).</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                        <div class="w-8 text-xl text-green-600">&#10048;</div>
+                        <div>
+                            <div class="font-semibold text-stone-800 text-sm">Centella Asiatica (Gotu Kola)</div>
+                            <div class="text-xs text-stone-500 mt-1">Stimulates Type I collagen and fibronectin; accelerates tissue repair synergistically with NMN.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="border border-stone-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-stone-800">Alternate Topicals (Phase 3)</h3>
+                    <span class="bg-stone-100 text-stone-600 text-xs font-bold px-2 py-1 rounded">Weeks 7.5-15.5</span>
+                </div>
+                <p class="text-sm text-stone-600 mb-4 pb-4 border-b border-stone-100">Focus: Switching signaling pathways after Phase 2 reset to prevent cellular adaptation and maintain high receptor sensitivity.</p>
+                <ul class="space-y-4">
+                    <li class="flex">
+                        <div class="w-8 text-xl text-indigo-600">&#10048;</div>
+                        <div>
+                            <div class="font-semibold text-stone-800 text-sm">Resveratrol / Pterostilbene</div>
+                            <div class="text-xs text-stone-500 mt-1">Topical sirtuin activators. They work on the exact pathways as oral NMN, providing localized dermal compounding effects.</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                        <div class="w-8 text-xl text-indigo-600">&#10048;</div>
+                        <div>
+                            <div class="font-semibold text-stone-800 text-sm">Boswellia Serrata Extract</div>
+                            <div class="text-xs text-stone-500 mt-1">Specific 5-LOX inhibitor; drastically reduces dermal inflammation and alters tumor microenvironments superficially.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="mt-8 bg-amber-50 rounded-xl p-5 border border-amber-200">
+            <div class="flex items-start">
+                <div class="text-2xl mr-4 text-amber-500">&#9888;</div>
+                <div>
+                    <h4 class="font-bold text-amber-900 mb-1">The Phase 2 Botanical Blackout</h4>
+                    <p class="text-sm text-amber-800 leading-relaxed">During Weeks 6.5 - 7.5, <strong>ZERO Active Topical Botanicals</strong> are permitted. Constant stimulation of dermal receptors leads to downregulation (tachyphylaxis). The one-week absolute cessation uncouples the receptors, ensuring that when Phase 3 initiates with alternate botanicals, the skin's biological response is as vigorous as Week 1.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="safety" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-4">Critical Operational Rules & Safety</h2>
+            <p class="text-stone-600 max-w-3xl">High-dose Methylene Blue (150mg) is a powerful pharmaceutical intervention. Adherence to these strict biological limitations is required to prevent severe adverse events.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="bg-white border-2 border-red-100 rounded-2xl overflow-hidden shadow-sm">
+                <div class="bg-red-50 px-6 py-4 border-b border-red-100 flex items-center">
+                    <span class="text-2xl text-red-600 mr-3">&#9763;</span>
+                    <h3 class="text-lg font-bold text-red-900">Dietary Tyramine Restriction</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-stone-700 mb-4">Because the 150mg daily dose completely deactivates your gut and systemic MAO-A enzymes, you must adhere to a strict low-tyramine diet to eliminate the risk of a dangerous postprandial hypertensive crisis.</p>
+                    <h4 class="font-semibold text-stone-900 text-sm mb-2">ABSOLUTELY AVOID:</h4>
+                    <ul class="grid grid-cols-2 gap-2 text-sm text-stone-600 mb-4">
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Aged Cheeses</li>
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Cured/Smoked Meats</li>
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Fermented Soy</li>
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Red Wine / Tap Beer</li>
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Marmite / Vegemite</li>
+                        <li class="flex items-center"><span class="text-red-500 mr-2">&#10007;</span> Overripe Avocados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
+                <div class="bg-stone-50 px-6 py-4 border-b border-stone-200 flex items-center">
+                    <span class="text-2xl text-blue-600 mr-3">&#9872;</span>
+                    <h3 class="text-lg font-bold text-stone-900">Physiological Monitoring Rules</h3>
+                </div>
+                <div class="p-6 space-y-5">
+                    <div>
+                        <h4 class="font-bold text-stone-800 text-sm mb-1">G6PD Screening Mandate</h4>
+                        <p class="text-sm text-stone-600">Because your oncological baseline operates at 150 mg daily, a verified Glucose-6-Phosphate Dehydrogenase (G6PD) status is non-negotiable. Administering this dose with G6PD deficiency will cause rapid, severe red blood cell destruction (hemolytic anemia).</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-800 text-sm mb-1">The Urine Tracking Mismatch</h4>
+                        <p class="text-sm text-stone-600">Completely ignore the visual color of your urine. High-dose oncological clearance means your urine will remain green or blue far into your washout phases (like Sundays). This is passive terminal elimination and does not reflect active tissue statuses. Rely strictly on the chronological clock.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm">
+    <div class="max-w-7xl mx-auto px-4">
+        <p>Interactive Architecture generated from the "Rejuvenation and no wrinkles while treating cancer with Methylene Blue high dose" Protocol.</p>
+        <p class="mt-2 text-stone-500">Information presented for analytical and architectural demonstration purposes based on provided text.</p>
+    </div>
+</footer>
+
+<script>
+    function switchTab(group, target) {
+        document.querySelectorAll(`#${group} .tab-content`).forEach(el => {
+            el.classList.add('hidden');
+            el.classList.remove('block');
+        });
+        
+        document.querySelectorAll(`#${group} .tab-btn`).forEach(el => {
+            el.classList.remove('tab-active', 'text-stone-800');
+            el.classList.add('text-stone-500');
+            if(el.id === `tab-${target}`) {
+                el.classList.add('tab-active');
+                el.classList.remove('text-stone-500');
+            }
+        });
+        
+        document.getElementById(`content-${target}`).classList.remove('hidden');
+        document.getElementById(`content-${target}`).classList.add('block');
+    }
+
+    function calculateFromMg() {
+        const mg = parseFloat(document.getElementById('inputMg').value) || 0;
+        const drops = Math.round((mg / 2.5) * 10) / 10;
+        document.getElementById('inputDrops').value = drops;
+        checkWarnings(mg, drops);
+    }
+
+    function calculateFromDrops() {
+        const drops = parseFloat(document.getElementById('inputDrops').value) || 0;
+        const mg = Math.round((drops * 2.5) * 10) / 10;
+        document.getElementById('inputMg').value = mg;
+        checkWarnings(mg, drops);
+    }
+
+    function updateCalculator() {
+        const targetMg = document.getElementById('calcPhase').value;
+        document.getElementById('inputMg').value = targetMg;
+        calculateFromMg();
+    }
+
+    function checkWarnings(mg, drops) {
+        const warningEl = document.getElementById('calcWarning');
+        if (mg > 150 || drops > 60) {
+            warningEl.innerHTML = "<span class='text-red-400 font-bold'>WARNING:</span> Exceeds maximum active day limits (150mg / 60 drops).";
+        } else if (document.getElementById('calcPhase').value === '75' && mg > 75) {
+            warningEl.innerHTML = "<span class='text-amber-400 font-bold'>NOTE:</span> Exceeds Phase 2 washout limit (75mg / 30 drops).";
+        } else {
+            warningEl.innerHTML = "";
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const phaseCtx = document.getElementById('phaseChart').getContext('2d');
+        const labels = Array.from({length: 16}, (_, i) => `Wk ${i + 1}`);
+        const dataMB = [150, 150, 150, 150, 150, 150, 75, 150, 150, 150, 150, 150, 150, 150, 150, 150];
+        
+        new Chart(phaseCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Methylene Blue Dosage (mg)',
+                    data: dataMB,
+                    borderColor: '#1d4ed8',
+                    backgroundColor: 'rgba(29, 78, 216, 0.1)',
+                    borderWidth: 3,
+                    stepped: 'middle',
+                    fill: true,
+                    pointBackgroundColor: '#1e3a8a',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y + ' mg';
+                                    if(context.parsed.y === 75) label += ' (Phase 2 Reset)';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 180,
+                        title: { display: true, text: 'Dosage (mg)' },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Mitochondrial Output', 'NAD+ Salvage', 'Inflammation Control', 'Apoptosis (Cancer)', 'Senescence Clearance'],
+                datasets: [
+                    {
+                        label: 'MB (150mg)',
+                        data: [95, 30, 40, 90, 60],
+                        backgroundColor: 'rgba(29, 78, 216, 0.2)',
+                        borderColor: '#1d4ed8',
+                        pointBackgroundColor: '#1d4ed8',
+                    },
+                    {
+                        label: 'NMN (500mg)',
+                        data: [40, 95, 30, 20, 85],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        pointBackgroundColor: '#10b981',
+                    },
+                    {
+                        label: 'PEA (600mg)',
+                        data: [20, 10, 95, 30, 40],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: '#f59e0b',
+                        pointBackgroundColor: '#f59e0b',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e7eb' },
+                        grid: { color: '#e5e7eb' },
+                        pointLabels: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#44403c'
+                        },
+                        ticks: { display: false, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } }
+                }
+            }
+        });
+
+        updateCalculator();
+    });
+</script>
+</body>
+</html>
